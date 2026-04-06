@@ -1,24 +1,25 @@
-import requests  # to talk to internet
+import requests
+import os
+from dotenv import load_dotenv
 
-# paste your API key here  to open the openweathermap
-API_KEY = "b00a0b997346dc0a12414363a2f3d9ca"
+load_dotenv()
+
+API_KEY = os.environ.get("WEATHER_API_KEY")
 
 city = input("Enter city name: ")
 
 url = "https://api.openweathermap.org/data/2.5/weather?q=" + \
-    city + "&appid=" + API_KEY + "&units=metric"  # builds web address to send request
+    city + "&appid=" + API_KEY + "&units=metric"
 
-response = requests.get(url)  # ask qn to app and store answer in response
-data = response.json()  # converts ans to dictionary
+response = requests.get(url)
+data = response.json()
 
-if data["cod"] == 200:  # check if req is succesfull 200 is successful and 404 is not successfull
-    name = data["name"]  # get city name from dictionary
-    country = data["sys"]["country"]  # get country code
-    # Gets the temperature. Opens `data` box, opens `main` box, gets `temp`.
+if data["cod"] == 200:
+    name = data["name"]
+    country = data["sys"]["country"]
     temp = data["main"]["temp"]
     feels_like = data["main"]["feels_like"]
     humidity = data["main"]["humidity"]
-    # select data from list.[0]  select first item
     description = data["weather"][0]["description"]
 
     print("\n===== WEATHER =====")
@@ -29,3 +30,12 @@ if data["cod"] == 200:  # check if req is succesfull 200 is successful and 404 i
     print("Description  :", description)
 else:
     print("City not found! Please check the name.")
+```
+
+---
+
+**Step 4 — Push to GitHub: **
+```
+git add .
+git commit - m "Fix exposed API key"
+git push
