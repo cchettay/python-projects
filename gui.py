@@ -1,26 +1,27 @@
 import tkinter as tk
 
 # Create the main window
-window = tk.Tk()
+window = tk.Tk()  # creates a blank window
 window.title("To-Do List")
-window.geometry("400x500")
+window.geometry("400x500")  # size of window
 
 # Function to add task
 
 
 def add_task():
-    task = entry.get()
+    task = entry.get()  # reads whatever user types in text box
     if task != "":
-        listbox.insert(tk.END, task)
-        entry.delete(0, tk.END)
+        listbox.insert(tk.END, task)  # insert the task to end of list
+        entry.delete(0, tk.END)  # delete task from text box after adding
     else:
+        # at the bottom of window it shows
         label_status.config(text="Please enter a task!")
 
 # Function to delete task
 
 
 def delete_task():
-    selected = listbox.curselection()
+    selected = listbox.curselection()  # select the task the user clicked on
     if selected:
         listbox.delete(selected)
         label_status.config(text="Task deleted!")
